@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SaaScend Agent Marketplace — Agentic RevOps Delivery</title>
+<meta name="description" content="The SaaScend Agent Marketplace. AI agents that turn every sales call into pipeline you can act on. Anthropic partner programme for SMB & mid-market. First access, free, for existing and former clients." />
+<link rel="icon" type="image/png" href="assets/saascend-mark.png" />
+<link rel="apple-touch-icon" href="assets/saascend-mark.png" />
+
+<!-- ============ CONFIG ============
+  BOOKING_LINK is a placeholder. Replace every href="#book" CTA, OR
+  swap the BOOKING_URL constant in the script at the bottom of this file
+  with your Calendly/scheduling URL and all CTAs update automatically.
+================================== -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --navy: #0a1428;
+    --navy-2: #0f1d3a;
+    --navy-3: #16264a;
+    --ink: #0a1428;
+    --teal: #00acd4;
+    --teal-2: #0090b8;
+    --sky: #2b8fff;
+    --grad: linear-gradient(120deg, #00acd4 0%, #2b8fff 100%);
+    --paper: #ffffff;
+    --mist: #f4f7fb;
+    --mist-2: #eaf0f7;
+    --line: #e2e9f2;
+    --muted: #5c6b82;
+    --muted-2: #8595aa;
+    --shadow: 0 18px 50px -18px rgba(10, 20, 40, 0.28);
+    --shadow-sm: 0 8px 24px -12px rgba(10, 20, 40, 0.25);
+    --radius: 18px;
+    --radius-sm: 12px;
+    --maxw: 1140px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  h1, h2, h3 { line-height: 1.12; letter-spacing: -0.02em; font-weight: 800; }
+  h2 { font-size: clamp(28px, 4vw, 42px); }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--teal-2);
+  }
+  .eyebrow.light { color: #6fd6f0; }
+  .eyebrow::before { content: ""; width: 22px; height: 2px; background: currentColor; border-radius: 2px; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-weight: 700; font-size: 15px;
+    padding: 14px 24px; border-radius: 999px;
+    border: 1px solid transparent; cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    white-space: nowrap;
+  }
+  .btn-primary { background: var(--grad); color: #04222e; box-shadow: 0 12px 26px -10px rgba(0,172,212,.6); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 18px 34px -10px rgba(0,172,212,.7); }
+  .btn-ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,.28); }
+  .btn-ghost:hover { background: rgba(255,255,255,.08); }
+  .btn-dark { background: var(--navy); color: #fff; }
+  .btn-dark:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+  .btn-lg { padding: 17px 32px; font-size: 16px; }
+
+  /* ---------- Nav ---------- */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(10,20,40,.82); backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+  .brand { display: flex; align-items: center; gap: 11px; color: #fff; font-weight: 800; font-size: 19px; letter-spacing: -0.01em; }
+  .brand img.logo { height: 30px; width: auto; display: block; }
+  footer .brand img.logo { height: 32px; }
+  .nav-links { display: flex; align-items: center; gap: 30px; }
+  .nav-links a { color: #c7d2e2; font-weight: 600; font-size: 14.5px; transition: color .15s; }
+  .nav-links a:hover { color: #fff; }
+  .nav-cta { display: flex; align-items: center; gap: 14px; }
+  .menu-btn { display: none; background: none; border: 0; color: #fff; font-size: 26px; cursor: pointer; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative; overflow: hidden;
+    background:
+      radial-gradient(1100px 600px at 78% -10%, rgba(61,165,255,.20), transparent 60%),
+      radial-gradient(900px 520px at 8% 10%, rgba(0,172,212,.18), transparent 55%),
+      linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+    color: #fff;
+  }
+  .hero::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 120px;
+    background: linear-gradient(180deg, transparent, var(--paper));
+    clip-path: polygon(0 100%, 18% 42%, 34% 74%, 52% 18%, 70% 66%, 86% 30%, 100% 80%, 100% 100%);
+    opacity: .9;
+  }
+  .hero-inner { position: relative; z-index: 2; padding: 76px 0 150px; display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; }
+  .hero h1 { font-size: clamp(34px, 5.4vw, 60px); font-weight: 900; }
+  .hero h1 .grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero p.lede { margin-top: 20px; font-size: clamp(16px, 1.8vw, 19px); color: #c4d0e3; max-width: 540px; }
+  .hero-cta { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero-meta { margin-top: 30px; display: flex; gap: 26px; flex-wrap: wrap; }
+  .hero-meta .pill { display: flex; align-items: center; gap: 9px; font-size: 14px; color: #aebbd0; font-weight: 600; }
+  .hero-meta .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 4px rgba(0,172,212,.18); }
+
+  /* Hero card stack */
+  .hero-art { position: relative; }
+  .glass {
+    background: linear-gradient(160deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+    border: 1px solid rgba(255,255,255,.14); border-radius: 18px;
+    padding: 22px; box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); backdrop-filter: blur(8px);
+  }
+  .gcard-head { display: flex; align-items: center; gap: 11px; margin-bottom: 16px; }
+  .gcard-head .ic { width: 38px; height: 38px; border-radius: 10px; background: var(--grad); display: grid; place-items: center; color:#04222e; font-weight: 900; }
+  .gcard-head h4 { font-size: 15.5px; color: #fff; }
+  .gcard-head span { font-size: 12.5px; color: #93a3ba; }
+  .scoreline { display: flex; align-items: center; justify-content: space-between; padding: 11px 0; border-top: 1px solid rgba(255,255,255,.08); font-size: 14px; color: #d4ddec; }
+  .scoreline:first-of-type { border-top: 0; }
+  .badge { font-size: 11.5px; font-weight: 800; padding: 4px 10px; border-radius: 999px; letter-spacing: .03em; }
+  .badge.win { background: rgba(0,172,212,.18); color: #3fcdf0; }
+  .badge.warn { background: rgba(255,184,77,.16); color: #ffc46b; }
+  .float {
+    position: absolute; right: -8px; bottom: -26px; z-index: 3;
+    background: #fff; color: var(--ink); border-radius: 14px; padding: 14px 16px;
+    box-shadow: var(--shadow); display: flex; align-items: center; gap: 12px; max-width: 270px;
+  }
+  .float .av { width: 36px; height: 36px; border-radius: 50%; background: var(--grad); display:grid; place-items:center; color:#04222e; font-weight:900; }
+  .float small { color: var(--muted); font-size: 12px; }
+  .float strong { display: block; font-size: 13.5px; }
+
+  /* ---------- Logo / trust strip ---------- */
+  .trust { background: var(--mist); border-bottom: 1px solid var(--line); }
+  .trust .wrap { padding: 26px 24px; display: flex; align-items: center; justify-content: center; gap: 14px 40px; flex-wrap: wrap; }
+  .trust span { font-weight: 700; color: var(--muted-2); font-size: 14px; letter-spacing: .02em; }
+  .trust .label { color: var(--muted); font-size: 13px; font-weight: 600; }
+
+  /* ---------- Section scaffolding ---------- */
+  section { padding: 86px 0; }
+  .sec-head { max-width: 720px; margin: 0 auto 52px; text-align: center; }
+  .sec-head p { margin-top: 16px; color: var(--muted); font-size: 17px; }
+
+  /* ---------- Offer banner ---------- */
+  .offer { background: linear-gradient(180deg, var(--mist) 0%, #fff 100%); }
+  .offer-card {
+    position: relative; overflow: hidden;
+    background: linear-gradient(125deg, var(--navy) 0%, var(--navy-3) 100%);
+    border-radius: 26px; color: #fff; padding: 52px clamp(28px,5vw,64px);
+    box-shadow: var(--shadow);
+  }
+  .offer-card::before {
+    content:""; position:absolute; inset:0;
+    background: radial-gradient(620px 320px at 90% 0%, rgba(0,172,212,.22), transparent 60%),
+                radial-gradient(520px 300px at 0% 110%, rgba(61,165,255,.18), transparent 55%);
+  }
+  .offer-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; }
+  .ribbon {
+    display:inline-flex; align-items:center; gap: 8px; background: rgba(0,172,212,.16);
+    border: 1px solid rgba(0,172,212,.4); color: #5fd2ef; font-weight: 800; font-size: 12.5px;
+    letter-spacing: .06em; text-transform: uppercase; padding: 7px 14px; border-radius: 999px;
+  }
+  .offer-card h2 { margin: 18px 0 14px; font-size: clamp(26px, 3.6vw, 38px); }
+  .offer-card h2 .grad { background: var(--grad); -webkit-background-clip: text; background-clip:text; color: transparent; }
+  .offer-card p.body { color: #c8d4e6; font-size: 16.5px; max-width: 560px; }
+  .offer-points { margin: 24px 0 4px; display: grid; gap: 14px; }
+  .opt { display: flex; gap: 13px; align-items: flex-start; }
+  .opt .chk { flex: 0 0 auto; width: 24px; height: 24px; border-radius: 7px; background: rgba(0,172,212,.18); color: var(--teal); display: grid; place-items: center; font-weight: 900; font-size: 13px; margin-top: 2px; }
+  .opt b { color: #fff; }
+  .opt span { color: #b8c5da; font-size: 14.8px; }
+  .offer-aside { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 18px; padding: 28px; text-align: center; }
+  .offer-aside .price { font-size: 46px; font-weight: 900; letter-spacing: -.03em; }
+  .offer-aside .price .strike { font-size: 20px; color: #8fa0b8; text-decoration: line-through; font-weight: 700; margin-right: 10px; }
+  .offer-aside .who { color: #aab8cd; font-size: 14px; margin: 6px 0 22px; }
+  .offer-aside .btn { width: 100%; justify-content: center; }
+  .offer-aside .scarce { margin-top: 16px; font-size: 12.5px; color: #ffc46b; font-weight: 700; }
+  .offer-resources { position: relative; z-index: 2; margin-top: 38px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.12); display: flex; gap: 14px 28px; flex-wrap: wrap; }
+  .res-link { display: inline-flex; align-items: center; gap: 9px; color: #cdd9ea; font-weight: 600; font-size: 14.5px; }
+  .res-link:hover { color: #fff; }
+  .res-link .ic { width: 30px; height: 30px; border-radius: 8px; background: rgba(255,255,255,.1); display: grid; place-items: center; font-size: 14px; }
+
+  /* ---------- Features ---------- */
+  .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .feature { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; transition: transform .18s, box-shadow .18s, border-color .18s; }
+  .feature:hover { transform: translateY(-4px); box-shadow: var(--shadow-sm); border-color: transparent; }
+  .feature .ic { width: 52px; height: 52px; border-radius: 14px; background: var(--mist); display: grid; place-items: center; font-size: 24px; margin-bottom: 18px; }
+  .feature h3 { font-size: 19px; margin-bottom: 9px; }
+  .feature p { color: var(--muted); font-size: 15px; }
+
+  /* ---------- Videos ---------- */
+  .videos { background: var(--mist); }
+  .vid-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .vid-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); }
+  .vid-frame { position: relative; padding-bottom: 56.25%; height: 0; background: #0b1730; }
+  .vid-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .vid-meta { padding: 20px 22px; }
+  .vid-meta .tag { font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--teal-2); }
+  .vid-meta h3 { font-size: 18px; margin: 8px 0 6px; }
+  .vid-meta p { color: var(--muted); font-size: 14.5px; }
+
+  /* ---------- Marketplace grid ---------- */
+  .market-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .agent {
+    position: relative; background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 28px; display: flex; flex-direction: column; transition: transform .18s, box-shadow .18s, border-color .18s;
+  }
+  .agent:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: transparent; }
+  .agent.featured { border: 1.5px solid var(--teal); box-shadow: 0 20px 50px -22px rgba(0,172,212,.45); }
+  .agent .flag { position: absolute; top: 18px; right: 18px; font-size: 11px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; padding: 5px 11px; border-radius: 999px; }
+  .flag.live { background: rgba(0,172,212,.14); color: var(--teal-2); }
+  .flag.soon { background: var(--mist-2); color: var(--muted); }
+  .agent .ic { width: 54px; height: 54px; border-radius: 14px; display: grid; place-items: center; font-size: 26px; background: var(--grad); color: #04222e; margin-bottom: 18px; }
+  .agent.soon .ic { background: var(--mist); color: var(--muted-2); filter: grayscale(.2); }
+  .agent h3 { font-size: 19px; }
+  .agent .role { color: var(--teal-2); font-weight: 700; font-size: 13px; margin: 4px 0 12px; letter-spacing: .02em; }
+  .agent.soon .role { color: var(--muted-2); }
+  .agent p { color: var(--muted); font-size: 14.5px; flex: 1; }
+  .agent .foot { margin-top: 20px; display: flex; align-items: center; justify-content: space-between; }
+  .agent .link { font-weight: 700; font-size: 14px; color: var(--ink); display: inline-flex; align-items: center; gap: 6px; }
+  .agent .link:hover { color: var(--teal-2); }
+  .agent.soon .link { color: var(--muted-2); pointer-events: none; }
+
+  /* ---------- How it works ---------- */
+  .how { background: var(--navy); color: #fff; }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; counter-reset: step; }
+  .step { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius); padding: 26px; position: relative; }
+  .step .num { width: 40px; height: 40px; border-radius: 12px; background: var(--grad); color: #04222e; font-weight: 900; display: grid; place-items: center; margin-bottom: 16px; }
+  .step h3 { font-size: 17px; margin-bottom: 8px; }
+  .step p { color: #aebbd0; font-size: 14px; }
+  .how .sec-head p { color: #aebbd0; }
+
+  /* ---------- Booking ---------- */
+  .book { background: linear-gradient(180deg, #fff 0%, var(--mist) 100%); }
+  .book-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line); border-radius: 26px; overflow: hidden; box-shadow: var(--shadow); background: #fff; }
+  .book-left { background: linear-gradient(150deg, var(--navy) 0%, var(--navy-3) 100%); color: #fff; padding: 48px; }
+  .book-left h2 { font-size: clamp(26px, 3vw, 34px); }
+  .book-left p { color: #c4d0e3; margin-top: 14px; font-size: 16px; }
+  .book-list { margin-top: 26px; display: grid; gap: 16px; }
+  .book-list li { list-style: none; display: flex; gap: 12px; align-items: flex-start; color: #d7e0ef; font-size: 15px; }
+  .book-list .chk { flex:0 0 auto; width: 22px; height: 22px; border-radius: 50%; background: rgba(0,172,212,.18); color: var(--teal); display: grid; place-items: center; font-size: 12px; font-weight: 900; margin-top: 2px; }
+  .book-contact { margin-top: 30px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.12); font-size: 14px; color: #aebbd0; }
+  .book-contact a { color: var(--teal); font-weight: 700; }
+  .book-right { padding: 48px; display: flex; flex-direction: column; justify-content: center; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 7px; }
+  .field input, .field select, .field textarea {
+    width: 100%; padding: 13px 14px; border: 1px solid var(--line); border-radius: 11px;
+    font-family: inherit; font-size: 14.5px; color: var(--ink); background: var(--mist); transition: border-color .15s, box-shadow .15s;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: 0; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(0,172,212,.18); background: #fff; }
+  .field textarea { resize: vertical; min-height: 92px; }
+  .form-note { font-size: 12.5px; color: var(--muted-2); margin-top: 4px; }
+  .form-success { display: none; background: rgba(0,172,212,.1); border: 1px solid var(--teal); color: var(--teal-2); padding: 14px 16px; border-radius: 12px; font-weight: 600; font-size: 14.5px; margin-bottom: 16px; }
+
+  /* ---------- Footer ---------- */
+  footer { background: var(--navy); color: #aebbd0; padding: 54px 0 34px; }
+  .foot-grid { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+  .foot-brand { max-width: 320px; }
+  .foot-brand p { margin-top: 14px; font-size: 14px; }
+  .foot-col h5 { color: #fff; font-size: 14px; margin-bottom: 14px; letter-spacing: .02em; }
+  .foot-col a { display: block; color: #aebbd0; font-size: 14px; margin-bottom: 10px; }
+  .foot-col a:hover { color: #fff; }
+  .foot-bottom { margin-top: 40px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.1); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 13px; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 980px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 60px; }
+    .hero-art { max-width: 460px; }
+    .offer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .feat-grid, .market-grid { grid-template-columns: 1fr 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .vid-grid { grid-template-columns: 1fr; }
+    .book-card { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .menu-btn { display: block; }
+    .nav-links.open { display: flex; position: absolute; top: 70px; left: 0; right: 0; flex-direction: column; background: var(--navy-2); padding: 20px 24px; gap: 18px; border-bottom: 1px solid rgba(255,255,255,.1); }
+  }
+  @media (max-width: 620px) {
+    .feat-grid, .market-grid, .steps, .form-row { grid-template-columns: 1fr; }
+    section { padding: 64px 0; }
+    .book-left, .book-right { padding: 32px; }
+    .offer-card { padding: 36px 24px; }
+    .nav-cta .btn-ghost { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand" aria-label="SaaScend home"><img class="logo" src="assets/saascend-logo-white.png" alt="SaaScend" /></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#offer">The Offer</a>
+      <a href="#marketplace">Marketplace</a>
+      <a href="#demos">See It Work</a>
+      <a href="#how">How It Works</a>
+      <a href="#book">Book a Call</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#demos" class="btn btn-ghost">Watch demo</a>
+      <a href="#book" class="btn btn-primary">Claim your spot</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu">&#9776;</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="top" style="padding:0;">
+  <div class="wrap hero-inner">
+    <div>
+      <span class="eyebrow light">SaaScend Agent Marketplace</span>
+      <h1>AI agents that turn every sales call into <span class="grad">pipeline you can act on.</span></h1>
+      <p class="lede">We've gone all-in on agentic delivery — and launched Anthropic's partner programme for the SMB &amp; mid-market space. Less admin. Cleaner pipeline. Reps who get better every week. Live in days, not months.</p>
+      <div class="hero-cta">
+        <a href="#book" class="btn btn-primary btn-lg">Talk to us &rarr;</a>
+        <a href="#marketplace" class="btn btn-ghost btn-lg">Browse the marketplace</a>
+      </div>
+      <div class="hero-meta">
+        <span class="pill"><span class="dot"></span> Anthropic Partner Programme</span>
+        <span class="pill"><span class="dot"></span> Salesforce &amp; HubSpot native</span>
+        <span class="pill"><span class="dot"></span> Live in days, not months</span>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <div class="glass">
+        <div class="gcard-head">
+          <div class="ic">AI</div>
+          <div>
+            <h4>Transcription Agent</h4>
+            <span>Discovery call · scored against MEDDPICC</span>
+          </div>
+        </div>
+        <div class="scoreline"><span>Metrics &amp; economic impact</span><span class="badge win">Strong</span></div>
+        <div class="scoreline"><span>Economic buyer identified</span><span class="badge win">Yes</span></div>
+        <div class="scoreline"><span>Decision criteria</span><span class="badge warn">Partial</span></div>
+        <div class="scoreline"><span>Champion engaged</span><span class="badge win">Yes</span></div>
+        <div class="scoreline"><span>CRM sync · Salesforce</span><span class="badge win">Auto-updated</span></div>
+      </div>
+      <div class="float">
+        <div class="av">#</div>
+        <div>
+          <strong>Posted to #revenue</strong>
+          <small>Call scored &amp; next steps shared — 3s after the call ended.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TRUST STRIP ===================== -->
+<div class="trust">
+  <div class="wrap">
+    <span class="label">Built on the stack you already run:</span>
+    <span>Anthropic Claude</span>
+    <span>Salesforce</span>
+    <span>HubSpot</span>
+    <span>Slack</span>
+    <span>n8n</span>
+  </div>
+</div>
+
+<!-- ===================== OFFER ===================== -->
+<section class="offer" id="offer">
+  <div class="wrap">
+    <div class="offer-card">
+      <div class="offer-grid">
+        <div>
+          <span class="ribbon">&#9889; First access · Free · For SaaScend clients</span>
+          <h2>For 12 months we've been building something new. <span class="grad">You get it first.</span></h2>
+          <p class="body">It's a transcription agent that turns every sales call into pipeline you can act on. As one of our existing and former clients, you get first access — free.</p>
+          <div class="offer-points">
+            <div class="opt"><span class="chk">&#10003;</span><span><b>Every call scored against your framework</b> — BANT, MEDDPICC, MEDDIC — with the intel in Slack instantly.</span></div>
+            <div class="opt"><span class="chk">&#10003;</span><span><b>Salesforce and HubSpot updated automatically</b> — your reps never touch the CRM again.</span></div>
+            <div class="opt"><span class="chk">&#10003;</span><span><b>Real coaching on every rep, every week</b> — what's working, what's not, where to step in.</span></div>
+          </div>
+        </div>
+        <div class="offer-aside">
+          <div class="price"><span class="strike">$$$</span>Free</div>
+          <div class="who">Reserved for the people who built SaaScend with us.</div>
+          <a href="#book" class="btn btn-primary btn-lg">Claim your spot</a>
+          <a href="#demos" class="btn btn-ghost btn-lg" style="margin-top:12px;">5-min walkthrough</a>
+          <div class="scarce">&#9201; A handful of spaces. Short window. Once they're gone, they're gone.</div>
+        </div>
+      </div>
+      <div class="offer-resources">
+        <a class="res-link" href="#demos"><span class="ic">&#9658;</span> 5-minute walkthrough</a>
+        <a class="res-link" href="https://docs.google.com/presentation/d/1pdrlJL8vXEb0lK5VfxK3hlMLhNvk6gQtI-UYCJgppko/edit" target="_blank" rel="noopener"><span class="ic">&#128196;</span> Overview deck</a>
+        <a class="res-link" href="#book"><span class="ic">&#128197;</span> Claim your spot</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FEATURES ===================== -->
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">What you get</span>
+      <h2>Less admin. Cleaner pipeline. Better reps.</h2>
+      <p>Three things happen automatically the moment a call ends — no rep input required.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feature">
+        <div class="ic">&#127919;</div>
+        <h3>Scored against your framework</h3>
+        <p>Every call evaluated against BANT, MEDDPICC, or MEDDIC — whichever you run. The intel lands in Slack the second the call ends, so deals never go cold.</p>
+      </div>
+      <div class="feature">
+        <div class="ic">&#128260;</div>
+        <h3>CRM updated automatically</h3>
+        <p>Salesforce and HubSpot fields, notes, and next steps written for you. Your reps never touch the CRM again — and your data is finally clean.</p>
+      </div>
+      <div class="feature">
+        <div class="ic">&#128202;</div>
+        <h3>Coaching, every rep, every week</h3>
+        <p>What's working, what's not, and exactly where to step in. Managers get a weekly read on the team without listening to a single recording.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DEMOS / LOOM ===================== -->
+<section class="videos" id="demos">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">See it work</span>
+      <h2>A 5-minute look at the agent in action</h2>
+      <p>Real walkthroughs — not slideware. Watch a call get scored, synced, and turned into coaching.</p>
+    </div>
+    <div class="vid-grid">
+      <div class="vid-card">
+        <div class="vid-frame">
+          <iframe src="https://www.loom.com/embed/556a3dfe1990401f850210b245cf0dcb" allowfullscreen title="SaaScend Agent walkthrough 1"></iframe>
+        </div>
+        <div class="vid-meta">
+          <div class="tag">Walkthrough</div>
+          <h3>From call to scored pipeline</h3>
+          <p>See how a single sales call becomes a scored, synced opportunity — automatically.</p>
+        </div>
+      </div>
+      <div class="vid-card">
+        <div class="vid-frame">
+          <iframe src="https://www.loom.com/embed/f598c8a6ae89410792ef682b2b089c8c" allowfullscreen title="SaaScend Agent walkthrough 2"></iframe>
+        </div>
+        <div class="vid-meta">
+          <div class="tag">Walkthrough</div>
+          <h3>Coaching &amp; CRM in action</h3>
+          <p>Watch the agent write to the CRM and surface coaching for every rep, every week.</p>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:40px;">
+      <a href="#book" class="btn btn-dark btn-lg">Want a live demo on your own calls? &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MARKETPLACE ===================== -->
+<section id="marketplace">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The marketplace</span>
+      <h2>Agents for every part of revenue</h2>
+      <p>Start with the transcription agent — free, today. More agents from the SaaScend agentic delivery programme are rolling out continuously.</p>
+    </div>
+    <div class="market-grid">
+
+      <div class="agent featured">
+        <span class="flag live">Live · Free</span>
+        <div class="ic">&#127908;</div>
+        <h3>Transcription Agent</h3>
+        <div class="role">Call scoring · CRM sync · coaching</div>
+        <p>Turns every sales call into pipeline. Scores against your framework, updates Salesforce/HubSpot, and coaches every rep — live in days.</p>
+        <div class="foot">
+          <a href="#book" class="link">Claim your spot &rarr;</a>
+        </div>
+      </div>
+
+      <div class="agent">
+        <span class="flag live">Live</span>
+        <div class="ic">&#9989;</div>
+        <h3>CRM Hygiene Agent</h3>
+        <div class="role">Data quality · enrichment</div>
+        <p>Finds stale, duplicate, and missing records, then fixes them — so reporting and forecasting can finally be trusted.</p>
+        <div class="foot">
+          <a href="#book" class="link">Learn more &rarr;</a>
+        </div>
+      </div>
+
+      <div class="agent">
+        <span class="flag live">Live</span>
+        <div class="ic">&#128202;</div>
+        <h3>Pipeline Inspection Agent</h3>
+        <div class="role">Deal risk · forecasting</div>
+        <p>Reads every open deal against your methodology and flags risk, missing intel, and slippage before the forecast call.</p>
+        <div class="foot">
+          <a href="#book" class="link">Learn more &rarr;</a>
+        </div>
+      </div>
+
+      <div class="agent soon">
+        <span class="flag soon">Coming soon</span>
+        <div class="ic">&#9993;</div>
+        <h3>Follow-up Agent</h3>
+        <div class="role">Outreach · recap emails</div>
+        <p>Drafts the recap and next-step email straight from the call — on-brand, in the rep's voice, ready to send.</p>
+        <div class="foot"><a href="#book" class="link">Notify me</a></div>
+      </div>
+
+      <div class="agent soon">
+        <span class="flag soon">Coming soon</span>
+        <div class="ic">&#128270;</div>
+        <h3>Lead Routing Agent</h3>
+        <div class="role">Assignment · SLAs</div>
+        <p>Routes every inbound lead to the right rep instantly, enforces SLAs, and never lets a hot lead sit.</p>
+        <div class="foot"><a href="#book" class="link">Notify me</a></div>
+      </div>
+
+      <div class="agent soon">
+        <span class="flag soon">Coming soon</span>
+        <div class="ic">&#129504;</div>
+        <h3>Build Your Own</h3>
+        <div class="role">Custom agentic delivery</div>
+        <p>Have a workflow that eats your team's time? We build bespoke agents on the same agentic delivery stack.</p>
+        <div class="foot"><a href="#book" class="link">Talk to us</a></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HOW IT WORKS ===================== -->
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow light">How it works</span>
+      <h2 style="color:#fff;">Live in days, not months</h2>
+      <p>No rip-and-replace. The agent plugs into the stack you already run.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h3>Book a call</h3><p>15 minutes. We learn your framework, stack, and where the admin pain lives.</p></div>
+      <div class="step"><div class="num">2</div><h3>We connect</h3><p>We wire the agent to your call recorder, Slack, and Salesforce or HubSpot.</p></div>
+      <div class="step"><div class="num">3</div><h3>Calls get scored</h3><p>Every call is scored and synced automatically. Reps stop touching the CRM.</p></div>
+      <div class="step"><div class="num">4</div><h3>Coaching kicks in</h3><p>Weekly coaching on every rep — what's working, what's not, where to step in.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BOOKING ===================== -->
+<section class="book" id="book">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Claim your spot</span>
+      <h2>Speak to us &amp; learn more</h2>
+      <p>A handful of free spaces, open for a short window — reserved for the people who built SaaScend with us. Grab a slot before they fill.</p>
+    </div>
+    <div class="book-card">
+      <div class="book-left">
+        <h2>Book 15 minutes</h2>
+        <p>Come try it. We'll show you the agent running on your own calls and get you live in days.</p>
+        <ul class="book-list">
+          <li><span class="chk">&#10003;</span> A 5-minute walkthrough on your own framework</li>
+          <li><span class="chk">&#10003;</span> See the Slack + CRM sync live</li>
+          <li><span class="chk">&#10003;</span> No pressure, no cost — first access is free</li>
+        </ul>
+        <div class="book-contact">
+          Prefer email? Reach us at <a href="mailto:tej@saascend.com?subject=Agent%20Marketplace%20—%20Claim%20my%20spot">tej@saascend.com</a><br />
+          Or grab a time directly: <a href="#book" id="calLink" data-booking>open the scheduler &rarr;</a>
+        </div>
+      </div>
+      <div class="book-right">
+        <div class="form-success" id="formSuccess">&#10003; Thanks — we'll be in touch within one business day to lock in your slot.</div>
+        <form id="bookForm" novalidate>
+          <div class="form-row">
+            <div class="field">
+              <label for="fn">First name</label>
+              <input type="text" id="fn" name="fn" placeholder="Jane" required />
+            </div>
+            <div class="field">
+              <label for="ln">Last name</label>
+              <input type="text" id="ln" name="ln" placeholder="Doe" required />
+            </div>
+          </div>
+          <div class="field">
+            <label for="email">Work email</label>
+            <input type="email" id="email" name="email" placeholder="jane@company.com" required />
+          </div>
+          <div class="field">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" placeholder="Company Inc." />
+          </div>
+          <div class="field">
+            <label for="crm">Which CRM do you run?</label>
+            <select id="crm" name="crm">
+              <option value="">Select…</option>
+              <option>Salesforce</option>
+              <option>HubSpot</option>
+              <option>Both</option>
+              <option>Other / Not sure</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="msg">What would you like to learn more about?</label>
+            <textarea id="msg" name="msg" placeholder="Tell us about your team and your sales framework…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg" style="width:100%; justify-content:center;">Claim your free spot &rarr;</button>
+          <p class="form-note">By submitting you agree to be contacted about the SaaScend Agent Marketplace.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="brand" aria-label="SaaScend home"><img class="logo" src="assets/saascend-logo-white.png" alt="SaaScend" /></a>
+        <p>Your RevOps partner to scale for growth — now powered by agentic delivery and Anthropic's partner programme for SMB &amp; mid-market.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Marketplace</h5>
+        <a href="#offer">The free offer</a>
+        <a href="#marketplace">Browse agents</a>
+        <a href="#demos">See it work</a>
+        <a href="#how">How it works</a>
+      </div>
+      <div class="foot-col">
+        <h5>Resources</h5>
+        <a href="https://docs.google.com/presentation/d/1pdrlJL8vXEb0lK5VfxK3hlMLhNvk6gQtI-UYCJgppko/edit" target="_blank" rel="noopener">Overview deck</a>
+        <a href="https://www.loom.com/share/556a3dfe1990401f850210b245cf0dcb" target="_blank" rel="noopener">Walkthrough video 1</a>
+        <a href="https://www.loom.com/share/f598c8a6ae89410792ef682b2b089c8c" target="_blank" rel="noopener">Walkthrough video 2</a>
+        <a href="https://saascend.com" target="_blank" rel="noopener">saascend.com</a>
+      </div>
+      <div class="foot-col">
+        <h5>Get started</h5>
+        <a href="#book">Claim your spot</a>
+        <a href="mailto:tej@saascend.com">tej@saascend.com</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; <span id="yr"></span> SaaScend. All rights reserved.</span>
+      <span>Agentic RevOps delivery · Anthropic Partner</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ===== CONFIG: set your real scheduling link here ===== */
+  var BOOKING_URL = "#book"; // e.g. "https://calendly.com/saascend/agent-marketplace"
+
+  // Wire every booking CTA to BOOKING_URL when it's a real URL.
+  (function () {
+    if (BOOKING_URL && BOOKING_URL !== "#book") {
+      document.querySelectorAll('a[href="#book"], a[data-booking]').forEach(function (a) {
+        a.setAttribute("href", BOOKING_URL);
+        a.setAttribute("target", "_blank");
+        a.setAttribute("rel", "noopener");
+      });
+    }
+  })();
+
+  // Year
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  // Mobile menu
+  var menuBtn = document.getElementById("menuBtn");
+  var navLinks = document.getElementById("navLinks");
+  menuBtn.addEventListener("click", function () { navLinks.classList.toggle("open"); });
+  navLinks.addEventListener("click", function (e) { if (e.target.tagName === "A") navLinks.classList.remove("open"); });
+
+  // Booking form: if no real scheduler, fall back to a prefilled mailto so the lead is never lost.
+  document.getElementById("bookForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var f = e.target;
+    if (!f.fn.value || !f.ln.value || !f.email.value) {
+      f.reportValidity();
+      return;
+    }
+    if (BOOKING_URL && BOOKING_URL !== "#book") {
+      window.open(BOOKING_URL, "_blank", "noopener");
+    } else {
+      var subject = encodeURIComponent("Agent Marketplace — Claim my spot");
+      var body = encodeURIComponent(
+        "Name: " + f.fn.value + " " + f.ln.value + "\n" +
+        "Email: " + f.email.value + "\n" +
+        "Company: " + f.company.value + "\n" +
+        "CRM: " + f.crm.value + "\n\n" +
+        "Message:\n" + f.msg.value
+      );
+      window.location.href = "mailto:tej@saascend.com?subject=" + subject + "&body=" + body;
+    }
+    document.getElementById("formSuccess").style.display = "block";
+    f.reset();
+  });
+</script>
+</body>
+</html>
