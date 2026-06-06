@@ -106,7 +106,7 @@
       linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
     color: #fff;
   }
-  .hero::after {
+  section.hero::after {
     content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 120px;
     background: linear-gradient(180deg, transparent, var(--paper));
     clip-path: polygon(0 100%, 18% 42%, 34% 74%, 52% 18%, 70% 66%, 86% 30%, 100% 80%, 100% 100%);
@@ -375,7 +375,7 @@
   input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: #00acd4; cursor: pointer; border: 3px solid #fff; }
   .roi-results { background: linear-gradient(150deg, var(--navy) 0%, var(--navy-3) 100%); color: #fff; padding: 40px clamp(24px,4vw,44px); display: flex; flex-direction: column; justify-content: center; gap: 16px; }
   .roi-stat { display: flex; flex-direction: column; gap: 4px; }
-  .roi-stat.hero .roi-num { font-size: 44px; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .roi-stat.big .roi-num { font-size: 44px; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .roi-num { font-size: 26px; font-weight: 900; letter-spacing: -.02em; line-height: 1.05; }
   .roi-num small { font-size: 15px; font-weight: 700; color: #aebbd0; -webkit-text-fill-color: #aebbd0; }
   .roi-cap { font-size: 13px; color: #aebbd0; font-weight: 600; }
@@ -782,7 +782,7 @@
           <span class="roi-num"><span id="hrsOut">0</span> <small>hrs</small></span>
           <span class="roi-cap">Rep hours saved / month</span>
         </div>
-        <div class="roi-stat hero">
+        <div class="roi-stat big">
           <span class="roi-num">$<span id="moneyOut">0</span></span>
           <span class="roi-cap">Rep time reclaimed / month</span>
         </div>
