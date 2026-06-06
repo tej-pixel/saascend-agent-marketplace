@@ -146,6 +146,48 @@
   .float small { color: var(--muted); font-size: 12px; }
   .float strong { display: block; font-size: 13.5px; }
 
+  /* ---------- Live demo card ---------- */
+  .gc-title { flex: 1; min-width: 0; }
+  .live-pill { margin-left: auto; flex: 0 0 auto; display: inline-flex; align-items: center; gap: 7px; font-size: 10.5px; font-weight: 800; letter-spacing: .12em; color: #ff8585; background: rgba(255,77,77,.12); border: 1px solid rgba(255,77,77,.32); padding: 5px 10px; border-radius: 999px; transition: color .3s, background .3s, border-color .3s; }
+  .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #ff4d4d; animation: livepulse 1.5s infinite; }
+  @keyframes livepulse { 0% { box-shadow: 0 0 0 0 rgba(255,77,77,.55); } 70% { box-shadow: 0 0 0 7px rgba(255,77,77,0); } 100% { box-shadow: 0 0 0 0 rgba(255,77,77,0); } }
+  .live-pill.synced { color: var(--teal); background: rgba(0,172,212,.14); border-color: rgba(0,172,212,.4); }
+  .live-pill.synced .live-dot { background: var(--teal); animation: none; }
+
+  .proc { margin: 2px 0 14px; }
+  .proc-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 9px; }
+  .proc-label { font-size: 12.5px; color: #aebbd0; font-weight: 600; transition: color .3s; }
+  .wave { display: none; align-items: flex-end; gap: 3px; height: 16px; }
+  .hero-art.anim .wave { display: inline-flex; }
+  .hero-art.anim.done .wave { display: none; }
+  .wave i { width: 3px; height: 5px; border-radius: 2px; background: linear-gradient(180deg, var(--teal), var(--sky)); animation: wave .9s ease-in-out infinite; }
+  .wave i:nth-child(2){ animation-delay: .15s; } .wave i:nth-child(3){ animation-delay: .3s; }
+  .wave i:nth-child(4){ animation-delay: .45s; } .wave i:nth-child(5){ animation-delay: .2s; }
+  @keyframes wave { 0%,100% { height: 4px; } 50% { height: 16px; } }
+  .proc-bar { height: 5px; background: rgba(255,255,255,.09); border-radius: 999px; overflow: hidden; }
+  .proc-bar span { display: block; height: 100%; width: 100%; background: var(--grad); border-radius: 999px; transition: width .45s ease; }
+
+  .scoreline .slot { position: relative; display: inline-flex; align-items: center; justify-content: flex-end; min-width: 108px; height: 24px; }
+  .scoreline .analyzing { position: absolute; right: 0; top: 50%; transform: translateY(-50%); display: none; gap: 4px; }
+  .hero-art.anim .scoreline .analyzing { display: inline-flex; }
+  .scoreline .analyzing i { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.32); animation: dotpulse 1s infinite; }
+  .scoreline .analyzing i:nth-child(2){ animation-delay: .16s; } .scoreline .analyzing i:nth-child(3){ animation-delay: .32s; }
+  @keyframes dotpulse { 0%,100% { opacity: .25; transform: scale(.8); } 50% { opacity: 1; transform: scale(1); } }
+  .hero-art.anim .scoreline { color: #6f7f96; }
+  .hero-art.anim .scoreline .badge { position: absolute; right: 0; top: 50%; transform: translateY(-50%) scale(.55); opacity: 0; transition: opacity .3s ease, transform .35s cubic-bezier(.18,1.5,.4,1); }
+  .hero-art.anim .scoreline.is-done { color: #d4ddec; }
+  .hero-art.anim .scoreline.is-done .analyzing { opacity: 0; }
+  .hero-art.anim .scoreline.is-done .badge { opacity: 1; transform: translateY(-50%) scale(1); }
+
+  .hero-art.anim .float { opacity: 0; transform: translateY(18px) scale(.95); pointer-events: none; transition: opacity .55s ease, transform .55s cubic-bezier(.18,1.3,.4,1); }
+  .hero-art.anim .float.show { opacity: 1; transform: translateY(0) scale(1); }
+  @keyframes toastpop { 0% { transform: scale(.8); } 60% { transform: scale(1.12); } 100% { transform: scale(1); } }
+  .float.show .av { animation: toastpop .5s ease; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .live-dot, .wave i, .scoreline .analyzing i, .float.show .av { animation: none !important; }
+  }
+
   /* ---------- Logo / trust strip ---------- */
   .trust { background: var(--mist); border-bottom: 1px solid var(--line); }
   .trust .wrap { padding: 26px 24px; display: flex; align-items: center; justify-content: center; gap: 14px 40px; flex-wrap: wrap; }
@@ -341,21 +383,31 @@
     </div>
 
     <div class="hero-art">
-      <div class="glass">
+      <div class="glass" id="liveCard">
         <div class="gcard-head">
           <div class="ic">AI</div>
-          <div>
+          <div class="gc-title">
             <h4>Transcription Agent</h4>
             <span>Discovery call · scored against MEDDPICC</span>
           </div>
+          <div class="live-pill" id="livePill"><span class="live-dot"></span><span class="live-txt">LIVE</span></div>
         </div>
-        <div class="scoreline"><span>Metrics &amp; economic impact</span><span class="badge win">Strong</span></div>
-        <div class="scoreline"><span>Economic buyer identified</span><span class="badge win">Yes</span></div>
-        <div class="scoreline"><span>Decision criteria</span><span class="badge warn">Partial</span></div>
-        <div class="scoreline"><span>Champion engaged</span><span class="badge win">Yes</span></div>
-        <div class="scoreline"><span>CRM sync · Salesforce</span><span class="badge win">Auto-updated</span></div>
+
+        <div class="proc">
+          <div class="proc-row">
+            <span class="proc-label" id="procLabel">Scored &amp; synced to Salesforce</span>
+            <span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+          </div>
+          <div class="proc-bar"><span id="procFill"></span></div>
+        </div>
+
+        <div class="scoreline"><span>Metrics &amp; economic impact</span><span class="slot"><span class="analyzing" aria-hidden="true"><i></i><i></i><i></i></span><span class="badge win">Strong</span></span></div>
+        <div class="scoreline"><span>Economic buyer identified</span><span class="slot"><span class="analyzing" aria-hidden="true"><i></i><i></i><i></i></span><span class="badge win">Yes</span></span></div>
+        <div class="scoreline"><span>Decision criteria</span><span class="slot"><span class="analyzing" aria-hidden="true"><i></i><i></i><i></i></span><span class="badge warn">Partial</span></span></div>
+        <div class="scoreline"><span>Champion engaged</span><span class="slot"><span class="analyzing" aria-hidden="true"><i></i><i></i><i></i></span><span class="badge win">Yes</span></span></div>
+        <div class="scoreline"><span>CRM sync · Salesforce</span><span class="slot"><span class="analyzing" aria-hidden="true"><i></i><i></i><i></i></span><span class="badge win">Auto-updated</span></span></div>
       </div>
-      <div class="float">
+      <div class="float" id="slackToast">
         <div class="av">#</div>
         <div>
           <strong>Posted to #revenue</strong>
@@ -713,6 +765,82 @@
     document.getElementById("formSuccess").style.display = "block";
     f.reset();
   });
+
+  // Live demo card: loops transcribe -> score -> sync -> Slack post, while in view.
+  (function () {
+    var art = document.querySelector(".hero-art");
+    var card = document.getElementById("liveCard");
+    if (!art || !card) return;
+    var lines = Array.prototype.slice.call(card.querySelectorAll(".scoreline"));
+    var fill = document.getElementById("procFill");
+    var label = document.getElementById("procLabel");
+    var toast = document.getElementById("slackToast");
+    var pill = document.getElementById("livePill");
+    var pillTxt = pill ? pill.querySelector(".live-txt") : null;
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var timers = [];
+
+    function clear() { timers.forEach(clearTimeout); timers = []; }
+    function at(ms, fn) { timers.push(setTimeout(fn, ms)); }
+
+    function reset() {
+      art.classList.remove("done");
+      lines.forEach(function (l) { l.classList.remove("is-done"); });
+      toast.classList.remove("show");
+      fill.style.width = "0%";
+      label.textContent = "Transcribing live call…";
+      if (pill) { pill.classList.remove("synced"); if (pillTxt) pillTxt.textContent = "LIVE"; }
+    }
+
+    function play() {
+      clear();
+      reset();
+      at(180, function () { fill.style.width = "34%"; });
+      at(950, function () { label.textContent = "Scoring against MEDDPICC…"; fill.style.width = "58%"; });
+      var base = 1350, step = 380;
+      lines.forEach(function (l, i) {
+        at(base + i * step, function () {
+          l.classList.add("is-done");
+          fill.style.width = (62 + ((i + 1) / lines.length) * 38).toFixed(0) + "%";
+        });
+      });
+      var end = base + lines.length * step;
+      at(end + 260, function () {
+        art.classList.add("done");
+        fill.style.width = "100%";
+        label.textContent = "Scored & synced to Salesforce ✓";
+        if (pill) { pill.classList.add("synced"); if (pillTxt) pillTxt.textContent = "SYNCED"; }
+      });
+      at(end + 560, function () { toast.classList.add("show"); });
+      at(end + 3400, play);
+    }
+
+    if (reduce) {
+      lines.forEach(function (l) { l.classList.add("is-done"); });
+      toast.classList.add("show");
+      fill.style.width = "100%";
+      return;
+    }
+
+    art.classList.add("anim");
+    var running = false, everSeen = false;
+    function start() { if (running) return; running = true; play(); }
+    function stop() { running = false; clear(); }
+
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { everSeen = true; start(); }
+          else if (everSeen) { stop(); }
+        });
+      }, { threshold: 0.3 });
+      io.observe(card);
+      // Fallback for contexts where IO never reports visibility.
+      setTimeout(function () { if (!everSeen) start(); }, 1200);
+    } else {
+      start();
+    }
+  })();
 </script>
 </body>
 </html>
