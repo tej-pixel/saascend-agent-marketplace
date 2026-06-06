@@ -386,6 +386,88 @@
     .market-grid .agent.fade-in { animation: none; }
   }
 
+  /* ---------- Slack intel card ---------- */
+  .slacksec { background: var(--navy); color: #fff; }
+  .slacksec .sec-head p { color: #aebbd0; }
+  .slack-card { max-width: 780px; margin: 0 auto; background: #1a1d29; border: 1px solid rgba(255,255,255,.08); border-radius: 16px; box-shadow: var(--shadow); display: grid; grid-template-columns: 210px 1fr; overflow: hidden; }
+  .slk-side { background: #15171f; padding: 18px 14px; border-right: 1px solid rgba(255,255,255,.06); }
+  .slk-workspace { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 15px; color: #fff; margin-bottom: 18px; }
+  .slk-workspace .sw-mark { width: 26px; height: 26px; border-radius: 7px; background: var(--grad); display: flex; align-items: center; justify-content: center; font-size: 13px; color: #04222e; }
+  .slk-chan { font-size: 14px; color: #9aa6b8; padding: 6px 8px; border-radius: 6px; }
+  .slk-chan.active { background: rgba(0,172,212,.16); color: #fff; font-weight: 700; }
+  .slk-chan + .slk-chan { margin-top: 2px; }
+  .slk-main { display: flex; flex-direction: column; min-width: 0; }
+  .slk-head { padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,.06); font-weight: 800; font-size: 15px; }
+  .slk-head small { color: #9aa6b8; font-weight: 600; margin-left: 8px; font-size: 12.5px; }
+  .slk-feed { padding: 18px; min-height: 330px; }
+  .slk-msg { display: flex; gap: 12px; }
+  .slk-avatar { width: 38px; height: 38px; border-radius: 9px; background: var(--grad); color: #04222e; font-weight: 900; font-size: 13px; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+  .slk-body { min-width: 0; flex: 1; }
+  .slk-mline { display: flex; align-items: center; gap: 8px; font-size: 14px; margin-bottom: 6px; }
+  .slk-mline b { font-weight: 800; }
+  .slk-bot { font-size: 10px; font-weight: 800; letter-spacing: .04em; background: rgba(255,255,255,.12); color: #cdd6e4; padding: 1px 6px; border-radius: 4px; }
+  .slk-time { color: #9aa6b8; font-size: 12px; }
+  .slk-type { font-size: 15px; font-weight: 700; color: #fff; min-height: 22px; }
+  .slk-cursor { display: inline-block; width: 8px; height: 16px; background: #7fd4ec; margin-left: 2px; vertical-align: -2px; animation: slkblink 1s steps(1) infinite; }
+  @keyframes slkblink { 50% { opacity: 0; } }
+  .slk-fields { margin-top: 12px; display: flex; flex-direction: column; gap: 7px; }
+  .slk-field { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 14px; color: #cdd6e4; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06); border-radius: 8px; padding: 8px 12px; opacity: 0; transform: translateY(6px); transition: opacity .35s ease, transform .35s ease; }
+  .slk-field.show { opacity: 1; transform: none; }
+  .slk-next { margin-top: 12px; background: rgba(0,172,212,.1); border: 1px solid rgba(0,172,212,.3); border-radius: 10px; padding: 11px 14px; font-size: 14px; color: #dff4fb; opacity: 0; transform: translateY(6px); transition: opacity .35s ease, transform .35s ease; }
+  .slk-next.show { opacity: 1; transform: none; }
+  .slk-next b { color: #7fd4ec; }
+  .slk-react { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .slk-react span { font-size: 13px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 999px; padding: 3px 10px; opacity: 0; transform: scale(.6); transition: opacity .3s ease, transform .35s cubic-bezier(.18,1.5,.4,1); }
+  .slk-react span.show { opacity: 1; transform: none; }
+
+  /* ---------- Try it (drop in a call) ---------- */
+  .tryit { background: #fff; }
+  .badge.miss { background: rgba(255,99,99,.16); color: #ff9090; }
+  .try-card { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line); border-radius: 24px; overflow: hidden; box-shadow: var(--shadow); }
+  .try-left { padding: 34px clamp(22px,3vw,38px); display: flex; flex-direction: column; gap: 14px; }
+  .try-left > label { font-weight: 800; font-size: 15px; }
+  .try-samples { display: flex; flex-wrap: wrap; gap: 8px; }
+  .try-samples button { border: 1px solid var(--line); background: #fff; color: var(--muted); font-family: inherit; font-weight: 700; font-size: 13px; padding: 7px 13px; border-radius: 999px; cursor: pointer; transition: all .18s; }
+  .try-samples button:hover { border-color: var(--teal); color: var(--ink); }
+  .try-samples button.is-active { background: var(--navy); color: #fff; border-color: var(--navy); }
+  #tryInput { width: 100%; min-height: 150px; resize: vertical; border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px; font-family: inherit; font-size: 14px; color: var(--ink); line-height: 1.55; background: var(--mist); }
+  #tryInput:focus { outline: none; border-color: var(--teal); background: #fff; }
+  .try-note { font-size: 12.5px; color: var(--muted-2); }
+  .try-right { background: linear-gradient(150deg, var(--navy) 0%, var(--navy-3) 100%); color: #fff; padding: 34px clamp(22px,3vw,38px); display: flex; flex-direction: column; justify-content: center; }
+  .try-empty { color: #7e8ba3; font-weight: 600; text-align: center; font-size: 15px; }
+  .try-loading { text-align: center; }
+  .try-loading .dots { display: inline-flex; gap: 6px; margin-bottom: 12px; }
+  .try-loading .dots i { width: 9px; height: 9px; border-radius: 50%; background: #7fd4ec; animation: dotpulse 1s infinite; }
+  .try-loading .dots i:nth-child(2) { animation-delay: .16s; }
+  .try-loading .dots i:nth-child(3) { animation-delay: .32s; }
+  .try-loading p { color: #aebbd0; font-size: 14px; }
+  .try-result { animation: cardIn .4s ease both; }
+  .try-rhead { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 16px; }
+  .try-fw { display: block; font-size: 12px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: #7fd4ec; margin-bottom: 4px; }
+  .try-score { font-size: 40px; font-weight: 900; line-height: 1; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .try-score small { font-size: 14px; color: #aebbd0; -webkit-text-fill-color: #aebbd0; font-weight: 700; }
+  .try-rows { display: flex; flex-direction: column; gap: 9px; }
+  .try-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 14px; color: #cdd6e4; }
+  .try-cta { margin-top: 20px; justify-content: center; width: 100%; }
+
+  /* ---------- Sticky claim bar ---------- */
+  .claimbar { position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 60; transform: translateY(170%); transition: transform .45s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
+  .claimbar.show { transform: none; pointer-events: auto; }
+  .claimbar-inner { max-width: var(--maxw); margin: 0 auto; background: linear-gradient(120deg, var(--navy-2), var(--navy-3)); border: 1px solid rgba(255,255,255,.14); border-radius: 14px; box-shadow: 0 20px 50px -16px rgba(0,0,0,.55); display: flex; align-items: center; gap: 16px; padding: 12px 14px 12px 20px; color: #fff; }
+  .claimbar-dot { width: 9px; height: 9px; border-radius: 50%; background: #34e0a1; flex: 0 0 auto; animation: cbpulse 1.8s infinite; }
+  @keyframes cbpulse { 0% { box-shadow: 0 0 0 0 rgba(52,224,161,.55); } 70% { box-shadow: 0 0 0 9px rgba(52,224,161,0); } 100% { box-shadow: 0 0 0 0 rgba(52,224,161,0); } }
+  .claimbar-txt { font-size: 14.5px; font-weight: 600; color: #dce3ee; flex: 1 1 auto; }
+  .claimbar-txt b { color: #fff; font-weight: 800; }
+  .claimbar-txt .spots { color: #7fd4ec; font-weight: 800; }
+  .claimbar .btn { white-space: nowrap; }
+  .claimbar-x { background: transparent; border: 0; color: #8595aa; font-size: 22px; line-height: 1; cursor: pointer; padding: 2px 6px; flex: 0 0 auto; }
+  .claimbar-x:hover { color: #fff; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slk-cursor, .claimbar-dot, .try-loading .dots i { animation: none !important; }
+    .slk-field, .slk-next, .slk-react span { transition: none; }
+  }
+
   /* ---------- Responsive ---------- */
   @media (max-width: 980px) {
     .hero-inner { grid-template-columns: 1fr; gap: 60px; }
@@ -396,6 +478,9 @@
     .vid-grid { grid-template-columns: 1fr; }
     .book-card { grid-template-columns: 1fr; }
     .roi-card { grid-template-columns: 1fr; }
+    .try-card { grid-template-columns: 1fr; }
+    .slack-card { grid-template-columns: 1fr; }
+    .slk-side { display: none; }
     .nav-links { display: none; }
     .menu-btn { display: block; }
     .nav-links.open { display: flex; position: absolute; top: 70px; left: 0; right: 0; flex-direction: column; background: var(--navy-2); padding: 20px 24px; gap: 18px; border-bottom: 1px solid rgba(255,255,255,.1); }
@@ -408,6 +493,9 @@
     .nav-cta .btn-ghost { display: none; }
     .crm-fields { grid-template-columns: 1fr; }
     .crm-f.wide { grid-column: auto; }
+    .claimbar-txt .long { display: none; }
+    .claimbar-inner { padding: 11px 12px 11px 16px; gap: 12px; }
+    .claimbar .btn { padding: 11px 16px; font-size: 14px; }
   }
 </style>
 </head>
@@ -609,6 +697,48 @@
   </div>
 </section>
 
+<!-- ===================== SLACK INTEL ===================== -->
+<section class="slacksec" id="slack">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow light">Intel in Slack, instantly</span>
+      <h2>The score lands before the call even ends</h2>
+      <p>Every call is scored against your framework and posted straight to your team channel — nobody logs in to go looking for it.</p>
+    </div>
+    <div class="slack-card" id="slackCard">
+      <div class="slk-side">
+        <div class="slk-workspace"><span class="sw-mark">S</span> SaaScend</div>
+        <div class="slk-chan">&#35; general</div>
+        <div class="slk-chan active">&#35; revenue-intel</div>
+        <div class="slk-chan">&#35; deals-won</div>
+        <div class="slk-chan">&#35; coaching</div>
+      </div>
+      <div class="slk-main">
+        <div class="slk-head">&#35; revenue-intel <small>Call scores, posted live</small></div>
+        <div class="slk-feed">
+          <div class="slk-msg">
+            <div class="slk-avatar">SA</div>
+            <div class="slk-body">
+              <div class="slk-mline"><b>SaaScend Agent</b> <span class="slk-bot">APP</span> <span class="slk-time">just now</span></div>
+              <div class="slk-type" id="slkType"></div>
+              <div class="slk-fields">
+                <div class="slk-field"><span>Metrics &amp; economic impact</span><span class="badge win">Strong</span></div>
+                <div class="slk-field"><span>Economic buyer &mdash; D. Reyes, VP Rev</span><span class="badge win">Identified</span></div>
+                <div class="slk-field"><span>Decision criteria</span><span class="badge warn">Partial</span></div>
+                <div class="slk-field"><span>Champion &mdash; M. Tan</span><span class="badge win">Engaged</span></div>
+              </div>
+              <div class="slk-next">&#9889; <b>Recommended next step:</b> Book the security review with the CISO before Friday &mdash; it&rsquo;s the only thing between this deal and Solution Validation.</div>
+              <div class="slk-react">
+                <span>&#128293; 3</span><span>&#128064; 2</span><span>&#9989; 1</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== DEMOS / LOOM ===================== -->
 <section class="videos" id="demos">
   <div class="wrap">
@@ -641,6 +771,48 @@
     </div>
     <div style="text-align:center; margin-top:40px;">
       <a href="#book" class="btn btn-dark btn-lg">Want a live demo on your own calls? &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TRY IT ===================== -->
+<section class="tryit" id="try">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Try it yourself</span>
+      <h2>Drop in a call. Watch it get scored.</h2>
+      <p>Paste a snippet from a real sales call &mdash; or load a sample &mdash; and see the kind of scorecard your reps would get in seconds.</p>
+    </div>
+    <div class="try-card">
+      <div class="try-left">
+        <label for="tryInput">Paste a snippet from a sales call</label>
+        <div class="try-samples" id="trySamples">
+          <button type="button" data-sample="discovery">Discovery call</button>
+          <button type="button" data-sample="demo">Demo recap</button>
+          <button type="button" data-sample="neg">Negotiation</button>
+        </div>
+        <textarea id="tryInput" placeholder="e.g. &ldquo;They said budget is signed off for Q3, and Dana the VP of Revenue is the one who&rsquo;ll make the final call. Main concern is the security review&hellip;&rdquo;"></textarea>
+        <button type="button" id="tryScore" class="btn btn-primary btn-lg">Score this call &#9889;</button>
+        <p class="try-note">Demo only &mdash; canned for the web. Your real calls are scored live inside the product.</p>
+      </div>
+      <div class="try-right" id="tryRight">
+        <div class="try-empty" id="tryEmpty">Your scorecard will appear here &rarr;</div>
+        <div class="try-loading" id="tryLoading" hidden>
+          <span class="dots"><i></i><i></i><i></i></span>
+          <p>Analyzing transcript&hellip;</p>
+        </div>
+        <div class="try-result" id="tryResult" hidden>
+          <div class="try-rhead">
+            <div>
+              <span class="try-fw" id="tryFw">MEDDPICC</span>
+              <span class="try-score"><span id="tryScoreNum">0</span><small>/100</small></span>
+            </div>
+            <span class="badge win">Scored</span>
+          </div>
+          <div class="try-rows" id="tryRows"></div>
+          <a href="#book" class="btn btn-primary try-cta">Run this on your real calls &rarr;</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -896,6 +1068,16 @@
     </div>
   </div>
 </footer>
+
+<!-- ===================== STICKY CLAIM BAR ===================== -->
+<div class="claimbar" id="claimBar" role="region" aria-label="Limited offer">
+  <div class="claimbar-inner">
+    <span class="claimbar-dot" aria-hidden="true"></span>
+    <span class="claimbar-txt"><b>Free first access for SaaScend clients.</b><span class="long"> Limited cohort &mdash; </span> <span class="spots" id="claimSpots">7</span> spots left.</span>
+    <a href="#book" class="btn btn-primary">Claim your spot &rarr;</a>
+    <button class="claimbar-x" id="claimBarX" type="button" aria-label="Dismiss">&times;</button>
+  </div>
+</div>
 
 <script>
   /* ===== CONFIG: set your real scheduling link here ===== */
@@ -1180,6 +1362,197 @@
       el.addEventListener("input", calc);
     });
     calc();
+  })();
+
+  // ---------- Slack intel card: typewriter + staged reveal, loops while in view ----------
+  (function () {
+    var card = document.getElementById("slackCard");
+    if (!card) return;
+    var typeEl = document.getElementById("slkType");
+    var fields = Array.prototype.slice.call(card.querySelectorAll(".slk-field"));
+    var nextEl = card.querySelector(".slk-next");
+    var reacts = Array.prototype.slice.call(card.querySelectorAll(".slk-react span"));
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var HEAD = "Acme Corp · New Business — call scored ✅";
+    var CURSOR = '<span class="slk-cursor"></span>';
+    var timers = [];
+
+    function clr() { timers.forEach(clearTimeout); timers = []; }
+    function at(ms, fn) { timers.push(setTimeout(fn, ms)); }
+
+    function reset() {
+      typeEl.innerHTML = CURSOR;
+      fields.forEach(function (f) { f.classList.remove("show"); });
+      if (nextEl) nextEl.classList.remove("show");
+      reacts.forEach(function (r) { r.classList.remove("show"); });
+    }
+    function showAll() {
+      typeEl.textContent = HEAD;
+      fields.forEach(function (f) { f.classList.add("show"); });
+      if (nextEl) nextEl.classList.add("show");
+      reacts.forEach(function (r) { r.classList.add("show"); });
+    }
+
+    function play() {
+      clr(); reset();
+      var i = 0;
+      function tick() {
+        typeEl.innerHTML = HEAD.slice(0, i) + CURSOR;
+        i++;
+        if (i <= HEAD.length) at(34, tick);
+        else reveal();
+      }
+      function reveal() {
+        typeEl.innerHTML = HEAD;
+        fields.forEach(function (f, idx) { at(idx * 430, function () { f.classList.add("show"); }); });
+        var after = fields.length * 430;
+        at(after + 320, function () { if (nextEl) nextEl.classList.add("show"); });
+        reacts.forEach(function (r, idx) { at(after + 760 + idx * 200, function () { r.classList.add("show"); }); });
+        at(after + 760 + reacts.length * 200 + 4600, play); // loop
+      }
+      at(420, tick);
+    }
+
+    if (reduce) { showAll(); return; }
+
+    var running = false, everSeen = false;
+    function start() { if (running) return; running = true; play(); }
+    function stop() { running = false; clr(); }
+
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { everSeen = true; start(); }
+          else if (everSeen) { stop(); }
+        });
+      }, { threshold: 0.25 });
+      io.observe(card);
+      setTimeout(function () { if (!everSeen) start(); }, 1200);
+    } else {
+      start();
+    }
+  })();
+
+  // ---------- Try it: drop in a call -> canned scorecard ----------
+  (function () {
+    var samplesWrap = document.getElementById("trySamples");
+    var input = document.getElementById("tryInput");
+    var scoreBtn = document.getElementById("tryScore");
+    if (!samplesWrap || !input || !scoreBtn) return;
+
+    var empty = document.getElementById("tryEmpty");
+    var loading = document.getElementById("tryLoading");
+    var result = document.getElementById("tryResult");
+    var fwOut = document.getElementById("tryFw");
+    var scoreOut = document.getElementById("tryScoreNum");
+    var rowsOut = document.getElementById("tryRows");
+
+    var DATA = {
+      discovery: {
+        fw: "MEDDPICC", score: 72,
+        transcript: "Prospect: Honestly our reps lose 6+ hours a week to CRM admin and the forecast is never trusted. Rep: Who signs off on a purchase like this? Prospect: That'd be Dana, our VP of Revenue. We'd want it sorted before end of Q3.",
+        rows: [["Metrics & economic impact", "Strong", "win"], ["Economic buyer", "Identified — Dana, VP Rev", "win"], ["Decision criteria", "Vague", "warn"], ["Champion", "Not yet", "miss"]]
+      },
+      demo: {
+        fw: "MEDDPICC", score: 84,
+        transcript: "Rep: So when I showed the Slack scoring, what landed? Prospect: The auto-sync to Salesforce — that's exactly our gap. Champion: I'll take this to the team, I'm sold. Rep: Great, what's your evaluation criteria? Champion: Time-to-value and security.",
+        rows: [["Metrics & economic impact", "Strong", "win"], ["Decision criteria", "Clear", "win"], ["Champion", "Engaged", "win"], ["Competition", "In-house build", "warn"]]
+      },
+      neg: {
+        fw: "MEDDPICC", score: 66,
+        transcript: "Prospect: Budget's approved but procurement wants a 12% discount and legal needs two weeks. Rep: If we get to terms, are we good to sign this quarter? Prospect: Assuming security review passes, yes.",
+        rows: [["Budget / paper process", "Confirmed", "win"], ["Decision process", "Legal + procurement", "warn"], ["Economic buyer", "Engaged", "win"], ["Risk", "Security review pending", "miss"]]
+      }
+    };
+
+    var sampleBtns = Array.prototype.slice.call(samplesWrap.querySelectorAll("button"));
+    var active = null;
+    var animId = 0;
+
+    sampleBtns.forEach(function (b) {
+      b.addEventListener("click", function () {
+        sampleBtns.forEach(function (x) { x.classList.remove("is-active"); });
+        b.classList.add("is-active");
+        active = b.getAttribute("data-sample");
+        input.value = DATA[active].transcript;
+      });
+    });
+
+    input.addEventListener("input", function () {
+      // typing your own clears the chosen sample
+      sampleBtns.forEach(function (x) { x.classList.remove("is-active"); });
+      active = null;
+    });
+
+    function render(d) {
+      fwOut.textContent = d.fw;
+      rowsOut.innerHTML = "";
+      d.rows.forEach(function (r) {
+        var row = document.createElement("div");
+        row.className = "try-row";
+        row.innerHTML = "<span>" + r[0] + "</span><span class=\"badge " + r[2] + "\">" + r[1] + "</span>";
+        rowsOut.appendChild(row);
+      });
+      // count up the score — time-based, guarded, snaps to exact target
+      var target = d.score, myId = ++animId, dur = 650, start = (window.performance && performance.now) ? performance.now() : Date.now();
+      var raf = window.requestAnimationFrame || function (fn) { return setTimeout(function () { fn(Date.now()); }, 30); };
+      (function up(now) {
+        if (myId !== animId) return;
+        var t = now || ((window.performance && performance.now) ? performance.now() : Date.now());
+        var p = Math.min(1, (t - start) / dur);
+        scoreOut.textContent = Math.round(p * target);
+        if (p < 1) raf(up);
+      })(start);
+    }
+
+    scoreBtn.addEventListener("click", function () {
+      var key = active || "discovery";
+      var d = DATA[key];
+      if (empty) empty.hidden = true;
+      result.hidden = true;
+      loading.hidden = false;
+      scoreBtn.disabled = true;
+      setTimeout(function () {
+        loading.hidden = true;
+        result.hidden = false;
+        scoreBtn.disabled = false;
+        render(d);
+      }, 1300);
+    });
+  })();
+
+  // ---------- Sticky claim bar ----------
+  (function () {
+    var bar = document.getElementById("claimBar");
+    if (!bar) return;
+    var booking = document.getElementById("book");
+    var x = document.getElementById("claimBarX");
+    var dismissed = false;
+    try { dismissed = sessionStorage.getItem("claimbar-dismissed") === "1"; } catch (e) {}
+
+    var bookingInView = false;
+    function update() {
+      if (dismissed) { bar.classList.remove("show"); return; }
+      var past = (window.scrollY || window.pageYOffset) > 700;
+      if (past && !bookingInView) bar.classList.add("show");
+      else bar.classList.remove("show");
+    }
+
+    if (x) x.addEventListener("click", function () {
+      dismissed = true;
+      bar.classList.remove("show");
+      try { sessionStorage.setItem("claimbar-dismissed", "1"); } catch (e) {}
+    });
+
+    if ("IntersectionObserver" in window && booking) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { bookingInView = e.isIntersecting; });
+        update();
+      }, { threshold: 0.15 }).observe(booking);
+    }
+
+    window.addEventListener("scroll", update, { passive: true });
+    update();
   })();
 </script>
 </body>
