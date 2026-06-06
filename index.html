@@ -8,15 +8,16 @@
 <link rel="icon" type="image/png" href="assets/saascend-mark.png" />
 <link rel="apple-touch-icon" href="assets/saascend-mark.png" />
 
-<!-- ============ CONFIG ============
-  BOOKING_LINK is a placeholder. Replace every href="#book" CTA, OR
-  swap the BOOKING_URL constant in the script at the bottom of this file
-  with your Calendly/scheduling URL and all CTAs update automatically.
+<!-- ============ BOOKING ============
+  The Calendly scheduler is embedded inline in the #book section.
+  Every CTA uses href="#book" and smooth-scrolls to the embedded widget.
+  To change the meeting, update the data-url on .calendly-inline-widget.
 ================================== -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
 
 <style>
   :root {
@@ -299,6 +300,8 @@
   .book-contact { margin-top: 30px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.12); font-size: 14px; color: #aebbd0; }
   .book-contact a { color: var(--teal); font-weight: 700; }
   .book-right { padding: 48px; display: flex; flex-direction: column; justify-content: center; }
+  .book-right.book-cal { padding: 0; }
+  .book-cal .calendly-inline-widget { width: 100%; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .field { margin-bottom: 16px; }
   .field label { display: block; font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 7px; }
@@ -933,7 +936,7 @@
       <p>No rip-and-replace. The agent plugs into the stack you already run.</p>
     </div>
     <div class="steps">
-      <div class="step"><div class="num">1</div><h3>Book a call</h3><p>15 minutes. We learn your framework, stack, and where the admin pain lives.</p></div>
+      <div class="step"><div class="num">1</div><h3>Book a call</h3><p>30 minutes. We learn your framework, stack, and where the admin pain lives.</p></div>
       <div class="step"><div class="num">2</div><h3>We connect</h3><p>We wire the agent to your call recorder, Slack, and Salesforce or HubSpot.</p></div>
       <div class="step"><div class="num">3</div><h3>Calls get scored</h3><p>Every call is scored and synced automatically. Reps stop touching the CRM.</p></div>
       <div class="step"><div class="num">4</div><h3>Coaching kicks in</h3><p>Weekly coaching on every rep — what's working, what's not, where to step in.</p></div>
@@ -951,7 +954,7 @@
     </div>
     <div class="book-card">
       <div class="book-left">
-        <h2>Book 15 minutes</h2>
+        <h2>Book 30 minutes</h2>
         <p>Come try it. We'll show you the agent running on your own calls and get you live in days.</p>
         <ul class="book-list">
           <li><span class="chk">&#10003;</span> A 5-minute walkthrough on your own framework</li>
@@ -960,47 +963,11 @@
         </ul>
         <div class="book-contact">
           Prefer email? Reach us at <a href="mailto:tej@saascend.com?subject=Agent%20Marketplace%20—%20Claim%20my%20spot">tej@saascend.com</a><br />
-          Or grab a time directly: <a href="#book" id="calLink" data-booking>open the scheduler &rarr;</a>
+          Prefer to pick a time? <a href="#book" id="calLink">jump to the scheduler &rarr;</a>
         </div>
       </div>
-      <div class="book-right">
-        <div class="form-success" id="formSuccess">&#10003; Thanks — we'll be in touch within one business day to lock in your slot.</div>
-        <form id="bookForm" novalidate>
-          <div class="form-row">
-            <div class="field">
-              <label for="fn">First name</label>
-              <input type="text" id="fn" name="fn" placeholder="Jane" required />
-            </div>
-            <div class="field">
-              <label for="ln">Last name</label>
-              <input type="text" id="ln" name="ln" placeholder="Doe" required />
-            </div>
-          </div>
-          <div class="field">
-            <label for="email">Work email</label>
-            <input type="email" id="email" name="email" placeholder="jane@company.com" required />
-          </div>
-          <div class="field">
-            <label for="company">Company</label>
-            <input type="text" id="company" name="company" placeholder="Company Inc." />
-          </div>
-          <div class="field">
-            <label for="crm">Which CRM do you run?</label>
-            <select id="crm" name="crm">
-              <option value="">Select…</option>
-              <option>Salesforce</option>
-              <option>HubSpot</option>
-              <option>Both</option>
-              <option>Other / Not sure</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="msg">What would you like to learn more about?</label>
-            <textarea id="msg" name="msg" placeholder="Tell us about your team and your sales framework…"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary btn-lg" style="width:100%; justify-content:center;">Claim your free spot &rarr;</button>
-          <p class="form-note">By submitting you agree to be contacted about the SaaScend Agent Marketplace.</p>
-        </form>
+      <div class="book-right book-cal">
+        <div class="calendly-inline-widget" data-url="https://calendly.com/d/cvw8-ngk-r9h/saascend-agents?hide_gdpr_banner=1&primary_color=00acd4" style="min-width:320px;height:700px;"></div>
       </div>
     </div>
   </div>
@@ -1052,19 +1019,8 @@
 </div>
 
 <script>
-  /* ===== CONFIG: set your real scheduling link here ===== */
-  var BOOKING_URL = "#book"; // e.g. "https://calendly.com/saascend/agent-marketplace"
-
-  // Wire every booking CTA to BOOKING_URL when it's a real URL.
-  (function () {
-    if (BOOKING_URL && BOOKING_URL !== "#book") {
-      document.querySelectorAll('a[href="#book"], a[data-booking]').forEach(function (a) {
-        a.setAttribute("href", BOOKING_URL);
-        a.setAttribute("target", "_blank");
-        a.setAttribute("rel", "noopener");
-      });
-    }
-  })();
+  /* ===== Booking: Calendly scheduler is embedded inline in the #book section.
+     All CTAs use href="#book" and smooth-scroll to it. ===== */
 
   // Year
   document.getElementById("yr").textContent = new Date().getFullYear();
@@ -1074,31 +1030,6 @@
   var navLinks = document.getElementById("navLinks");
   menuBtn.addEventListener("click", function () { navLinks.classList.toggle("open"); });
   navLinks.addEventListener("click", function (e) { if (e.target.tagName === "A") navLinks.classList.remove("open"); });
-
-  // Booking form: if no real scheduler, fall back to a prefilled mailto so the lead is never lost.
-  document.getElementById("bookForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-    var f = e.target;
-    if (!f.fn.value || !f.ln.value || !f.email.value) {
-      f.reportValidity();
-      return;
-    }
-    if (BOOKING_URL && BOOKING_URL !== "#book") {
-      window.open(BOOKING_URL, "_blank", "noopener");
-    } else {
-      var subject = encodeURIComponent("Agent Marketplace — Claim my spot");
-      var body = encodeURIComponent(
-        "Name: " + f.fn.value + " " + f.ln.value + "\n" +
-        "Email: " + f.email.value + "\n" +
-        "Company: " + f.company.value + "\n" +
-        "CRM: " + f.crm.value + "\n\n" +
-        "Message:\n" + f.msg.value
-      );
-      window.location.href = "mailto:tej@saascend.com?subject=" + subject + "&body=" + body;
-    }
-    document.getElementById("formSuccess").style.display = "block";
-    f.reset();
-  });
 
   // Live demo card: loops transcribe -> score -> sync -> Slack post, while in view.
   (function () {
@@ -1527,5 +1458,6 @@
     update();
   })();
 </script>
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </body>
 </html>
